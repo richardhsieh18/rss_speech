@@ -37,7 +37,7 @@ class NewsTableViewController: UITableViewController {
         }
 
         let feedParser = FeedParser()
-        feedParser.parseFeed(feedUrl: "https://www.apple.com/main/rss/hotnews/hotnews.rss", completionHandler: {
+        feedParser.parseFeed(feedUrl: "http://www.chinatimes.com/rss/realtimenews.xml", completionHandler: {
             (rssItems: [(title: String, description: String, pubDate: String)]) -> Void in
             
             self.rssItems = rssItems
@@ -77,7 +77,8 @@ class NewsTableViewController: UITableViewController {
         if let item = rssItems?[indexPath.row] {
             cell.titleLabel.text = item.title
             cell.dateLabel.text = item.pubDate
-            cell.descriptionLabel.text = item.description
+            //一定要加在這才OK..很奇怪
+            cell.descriptionLabel.text = item.description.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
             
             if let cellStates = cellStates {
                 cell.descriptionLabel.numberOfLines = (cellStates[indexPath.row] == .expanded) ? 0 : 4
@@ -111,7 +112,7 @@ class NewsTableViewController: UITableViewController {
         myUtterance.pitchMultiplier = 1.2
         myUtterance.postUtteranceDelay = 0.1
         myUtterance.volume = 1
-        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
         synth.speak(myUtterance)
     }
     

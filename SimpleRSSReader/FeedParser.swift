@@ -23,7 +23,7 @@ class FeedParser: NSObject, XMLParserDelegate {
         }
     }
     private var currentPubDate:String = "" {
-        didSet {
+        didSet {    
             currentPubDate = currentPubDate.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         }
     }
@@ -79,7 +79,6 @@ class FeedParser: NSObject, XMLParserDelegate {
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        
         switch currentElement {
         case "title": currentTitle += string
         case "description": currentDescription += string
