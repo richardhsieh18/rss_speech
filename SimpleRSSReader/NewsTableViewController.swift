@@ -101,7 +101,7 @@ class NewsTableViewController: UITableViewController {
     var index:IndexPath!
     
     @IBAction func textToSpeechButton(_ sender: UIButton) {
-        
+        //這個方法太讚了
         if let cell = sender.superview?.superview?.superview as? NewsTableViewCell {
             //let indexPath = tableView.indexPath(for: cell)
             myUtterance = AVSpeechUtterance(string: cell.titleLabel.text! + cell.descriptionLabel.text!)
