@@ -9,6 +9,16 @@
 import UIKit
 import AVFoundation
 
+struct NewsURL {
+    let emarket:String
+    let cnn:String
+    
+    init() {
+        self.emarket = "http://feeds.emarketer.com/Articles.xml?src=rss_top_right_newsltr"
+        self.cnn = "http://rss.cnn.com/rss/edition.rss"
+    }
+}
+
 class NewsTableViewController: UITableViewController {
 
     enum CellState {
@@ -39,15 +49,34 @@ class NewsTableViewController: UITableViewController {
         let feedParser = FeedParser()
         feedParser.parseFeed(feedUrl: "http://www.chinatimes.com/rss/realtimenews.xml", completionHandler: {
             (rssItems: [(title: String, description: String, pubDate: String)]) -> Void in
-            
             self.rssItems = rssItems
+            self.addNewSite(URL: NewsURL().emarket)
+            self.addNewSite(URL: NewsURL().cnn)
+            
+            
+            
             self.cellStates = [CellState](repeating: .collapsed, count: rssItems.count)
+            OperationQueue.main.addOperation({ () -> Void in
+                self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+            })
+        })
+    }
+    
+    func addNewSite(URL: String){
+         let feedParser = FeedParser()
+            feedParser.parseFeed(feedUrl: URL, completionHandler: {
+            (rssItems: [(title: String, description: String, pubDate: String)]) -> Void in
+                for i in rssItems {
+                    self.rssItems?.append(i)
+                    self.cellStates?.append(CellState.collapsed)
+                }
             
             OperationQueue.main.addOperation({ () -> Void in
                 self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
             })
         })
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -66,7 +95,6 @@ class NewsTableViewController: UITableViewController {
         guard let rssItems = rssItems else {
             return 0
         }
-        
         return rssItems.count
     }
 
