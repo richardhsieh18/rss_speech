@@ -47,13 +47,25 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MB-wc-yXg">
-                                                    <rect key="frame" x="0.0" y="41" width="31" height="30"/>
-                                                    <state key="normal" title="播放"/>
-                                                    <connections>
-                                                        <action selector="textToSpeechButton:" destination="Wwh-fz-HSG" eventType="touchUpInside" id="4zx-uL-Hzd"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cHH-jo-Goq">
+                                                    <rect key="frame" x="0.0" y="41" width="62" height="30"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MB-wc-yXg">
+                                                            <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
+                                                            <state key="normal" title="播放"/>
+                                                            <connections>
+                                                                <action selector="textToSpeechButton:" destination="Wwh-fz-HSG" eventType="touchUpInside" id="4zx-uL-Hzd"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0v-2I-mXk">
+                                                            <rect key="frame" x="31" y="0.0" width="31" height="30"/>
+                                                            <state key="normal" title="停止"/>
+                                                            <connections>
+                                                                <action selector="btnStopSpeech:" destination="Wwh-fz-HSG" eventType="touchUpInside" id="Dy6-ao-CoQ"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </stackView>
                                     </subviews>

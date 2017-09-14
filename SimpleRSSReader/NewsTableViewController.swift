@@ -131,7 +131,7 @@ class NewsTableViewController: UITableViewController {
     
     @IBAction func textToSpeechButton(_ sender: UIButton) {
         //這個方法太讚了
-        if let cell = sender.superview?.superview?.superview as? NewsTableViewCell {
+        if let cell = sender.superview?.superview?.superview?.superview as? NewsTableViewCell {
             //let indexPath = tableView.indexPath(for: cell)
             myUtterance = AVSpeechUtterance(string: cell.titleLabel.text! + cell.descriptionLabel.text!)
         }
@@ -142,6 +142,11 @@ class NewsTableViewController: UITableViewController {
         myUtterance.volume = 1
         myUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
         synth.speak(myUtterance)
+    }
+    
+    @IBAction func btnStopSpeech(_ sender: UIButton) {
+        //0 是馬上停止,1是唸完當下的字才會停止
+        synth.stopSpeaking(at: AVSpeechBoundary(rawValue: 0)!)
     }
     
     
